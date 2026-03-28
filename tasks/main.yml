@@ -1,0 +1,13 @@
+---
+# sysctl tasks
+
+
+- name: Set sysctl variable in {{ sysctl_config }}
+  ansible.posix.sysctl:
+    name: '{{ item.key }}'
+    state: present
+    sysctl_file: '{{ sysctl_config }}'
+    value: '{{ item.value }}'
+    reload: '{{ sysctl_reload }}'
+  with_dict: '{{ sysctl }}'
+  become: true

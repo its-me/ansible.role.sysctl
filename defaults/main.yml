@@ -1,0 +1,14 @@
+---
+# sysctl default variables
+
+
+sysctl: {}
+
+sysctl_file: sysctl
+sysctl_config_dir_main: /etc
+sysctl_config_dir_sub: '{{ sysctl_config_dir_main }}/sysctl.d'
+
+sysctl_config_dir: '{{ sysctl_config_dir_main if (sysctl_file == role_name) else sysctl_config_dir_sub }}'
+sysctl_config: '{{ sysctl_config_dir }}/{{ sysctl_file }}.conf'
+
+sysctl_reload: false
